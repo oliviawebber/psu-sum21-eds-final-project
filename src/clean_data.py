@@ -6,6 +6,7 @@ datasets = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
 # Information about where the relevant attributes are stored, these
 # 13 attributes + the class are what are commonly used
 attributeIndexes = [2, 3, 8, 9, 11, 15, 18, 31, 37, 39, 40, 43, 50]
+dataHeaders = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'num']
 numAttributes = len(attributeIndexes)
 classIndex = 57
 
@@ -13,9 +14,11 @@ classIndex = 57
 for dataset in datasets:
     with open('../data/{}-clean.csv'.format(dataset), 'w', newline='') as w:
         with open('../data/{}.data'.format(dataset), 'r') as f:
-            csvWriter = csv.writer(w, delimiter=',')
+            csvWriter = csv.writer(w, delimiter=',') 
             dataPoint = list()
 
+            # Write the header line
+            csvWriter.writerow(dataHeaders)
             for line in f:
                 # For each line, it is space seperated so split the entries
                 # and remove the \n character from the last entry
