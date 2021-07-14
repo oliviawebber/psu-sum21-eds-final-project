@@ -10,9 +10,6 @@ import itertools
 # Read in the clean data
 df = pd.read_csv('../data/cleveland-clean.csv', sep=',',header=0)
 
-# Capture the headers for plotting later
-labels = list(df.columns)
-
 # Create the array of target variables
 targets = np.array(df['num'])
 
@@ -52,7 +49,7 @@ rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid
 rf_random.fit(train_features, train_targets)
 print(rf_random.best_params_)
 
+# Example using random parameters for how to setup a classifier
 rf1 = RandomForestClassifier(n_estimators=2000, min_samples_split=10, min_samples_leaf=4,max_features='auto',max_depth=30,bootstrap=True)
-
 rf1.fit(train_features, train_targets)
 print(rf1.score(test_features, test_targets))
