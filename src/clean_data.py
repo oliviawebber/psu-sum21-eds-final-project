@@ -1,5 +1,8 @@
 import csv
 
+# Toggles between binary and default classes in the clean dataset
+BINARY_CLASSES = True
+
 # List of all the datasets to make looping over them easier
 datasets = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
 
@@ -28,11 +31,19 @@ for dataset in datasets:
                 # If the last entry is name, a full data point has been
                 # processed so select the relevant attributes and save it
                 if line[-1] == 'name':
-                    # Select out the desired attributes and cast them to floats
+                    # Select out the desired attributes and cast them to floats, the class
+                    # should also be downcasted to a binary variable
+                    # i.e. 0 => 0 No presence 1,2,3,4 => 1 Presence
+                    # The data set is not large enough to support a more detailed classification
+                    # scheme
                     filteredDataPoint = [0] * (numAttributes+1)
                     for n in range(numAttributes):
                         filteredDataPoint[n] = float(dataPoint[attributeIndexes[n]])
-                        filteredDataPoint[-1] = float(dataPoint[classIndex])
+                        dataPointClass = float(dataPoint[classIndex])
+                        
+                        if BINARY_CLASSES and dataPointClass > 0.0:
+                            dataPointClass = 1.0
+                        filteredDataPoint[-1] = dataPointClass
 
                     # Save the data point
                     csvWriter.writerow(filteredDataPoint)
