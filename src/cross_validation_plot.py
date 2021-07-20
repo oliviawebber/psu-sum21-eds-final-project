@@ -1,4 +1,4 @@
-from sklearn.model_selection import train_test_split
+import sklearn as sk
 import matplotlib.pyplot as plt
 from joblib import load
 import pandas as pd
@@ -28,7 +28,7 @@ for model in fileList:
         data = np.array(data)
 
         # Split the data into training and test sets
-        trainData, testData, trainTargets, testTargets = train_test_split(data, targets, test_size=0.10, random_state=0)
+        trainData, testData, trainTargets, testTargets = sk.model_selection.train_test_split(data, targets, test_size=0.10, random_state=0)
 
         
         # Save accuracy
