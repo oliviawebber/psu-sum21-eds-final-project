@@ -11,8 +11,8 @@ fileList = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
 # Setup an array for storing the accuracy results
 results = np.zeros((4,4))
 
+# Script variables
 modelIndex = 0
-
 projectRoot = str(pathlib.Path(__file__).parent.parent.resolve())
 for model in fileList:
     # Load the trained model

@@ -1,4 +1,5 @@
 import csv
+import pathlib
 
 # Toggles between binary and default classes in the clean dataset
 BINARY_CLASSES = True
@@ -13,10 +14,13 @@ dataHeaders = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalac
 numAttributes = len(attributeIndexes)
 classIndex = 57
 
+# Fetch the project root string so we know where to read and save to
+projectRoot = str(pathlib.Path(__file__).parent.parent.resolve())
+
 # Loop over every dataset, cleaning the data
 for dataset in datasets:
-    with open('../data/{}-clean.csv'.format(dataset), 'w', newline='') as w:
-        with open('../data/{}.data'.format(dataset), 'r') as f:
+    with open(projectRoot + '/data/{}-clean.csv'.format(dataset), 'w', newline='') as w:
+        with open(projectRoot + '/data/{}.data'.format(dataset), 'r') as f:
             csvWriter = csv.writer(w, delimiter=',') 
             dataPoint = list()
 

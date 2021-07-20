@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from joblib import load
 import pandas as pd
 import numpy as np
+import pathlib
 
 # List of all the  files we need to train models for
 fileList = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
@@ -10,11 +11,13 @@ fileList = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
 # Setup an array for storing the accuracy results
 results = np.zeros((4,4))
 
+# Script variables
 modelIndex = 0
+projectRoot = str(pathlib.Path(__file__).parent.parent.resolve())
 for model in fileList:
     # Load the trained model and labels
-    rfClassifier = load('../models/{}-trained-model.joblib'.format(model))
-    data = pd.read_csv('../data/cleveland-clean.csv', sep=',', header=0)
+    rfClassifier = load(projectRoot + '/models/{}-trained-model.joblib'.format(model))
+    data = pd.read_csv(projectRoot + '/data/cleveland-clean.csv', sep=',', header=0)
     labels = list(data.columns)[:-1]
 
     # Setup and display the plots

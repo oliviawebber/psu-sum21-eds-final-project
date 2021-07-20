@@ -6,9 +6,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
+import pathlib
+
+# Project root so we know where to load data
+projectRoot = str(pathlib.Path(__file__).parent.parent.resolve())
 
 # Read in the clean data
-df = pd.read_csv('../data/cleveland-clean.csv', sep=',',header=0)
+df = pd.read_csv(projectRoot + '/data/cleveland-clean.csv', sep=',',header=0)
 
 # Create the array of target variables
 targets = np.array(df['num'])

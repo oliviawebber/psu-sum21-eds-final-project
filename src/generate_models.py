@@ -4,6 +4,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from joblib import dump
 import pandas as pd
 import numpy as np
+import pathlib
 
 # Setup the search grid for doing hyperparameter tuning
 # Number of trees in the random forest
@@ -31,9 +32,12 @@ randomGrid = {
 # List of all the  files we need to train models for
 fileList = ['cleveland', 'hungarian', 'long-beach-va', 'switzerland']
 
+# Project root so we know where to save models
+projectRoot = str(pathlib.Path(__file__).parent.parent.resolve())
+
 for file in fileList:
     # Read in the clean data
-    data = pd.read_csv('../data/{}-clean.csv'.format(file), sep=',', header=0)
+    data = pd.read_csv(projectRoot + '/data/{}-clean.csv'.format(file), sep=',', header=0)
 
     # Remove the targets from the data and store them. Then convert the data
     # into a features matrix
@@ -66,7 +70,7 @@ for file in fileList:
     ).fit(trainData, trainTargets)
 
     # Save the newly trained model
-    dump(rfClassifier, '../models/{}-trained-model.joblib'.format(file))
+    dump(rfClassifier, projectRoot + '/models/{}-trained-model.joblib'.format(file))
         
     
     
