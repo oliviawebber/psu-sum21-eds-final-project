@@ -35,6 +35,7 @@ for model in fileList:
 
         
         # Save accuracy
+        print(rfClassifier)
         results[modelIndex][fileIndex] = rfClassifier.score(testData, testTargets)
         fileIndex += 1
     modelIndex += 1

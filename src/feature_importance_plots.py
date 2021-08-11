@@ -19,6 +19,7 @@ for model in fileList:
     rfClassifier = load(projectRoot + '/models/{}-trained-model.joblib'.format(model))
     data = pd.read_csv(projectRoot + '/data/cleveland-clean.csv', sep=',', header=0)
     labels = list(data.columns)[:-1]
+    labels.remove('cp')
 
     # Setup and display the plots
     labelMarks = np.arange(len(labels))
